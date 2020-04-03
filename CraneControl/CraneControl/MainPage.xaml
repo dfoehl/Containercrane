@@ -20,12 +20,13 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Content="-&gt;" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" Width="80" Click="CraneRightClicked"/>
-        <Button Content="&lt;-"  Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" Width="80" Click="CraneLeftClicked"/>
-        <Button Content="\/" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" Width="80" Click="SpreaderDownClicked"/>
-        <Button Content="/\" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" Width="80" Click="SpreaderUpClicked"/>
-        <Button Content="-&gt;" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" Height="80" Width="80" Click="CrabRightClicked"/>
-        <Button Content="&lt;-" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" Width="80" Click="CrabLeftClicked"/>
-        <TextBox x:Name="urlBox" HorizontalAlignment="Center"  TextWrapping="NoWrap" VerticalAlignment="Center"  Grid.ColumnSpan="3" Width="340" TextChanged="UrlChanged"/>
+        <Button Content="-&gt;" Grid.Column="2" Grid.Row="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PointerPressed="CraneRightPressed" PointerReleased="CraneReleased" />
+        <Button Content="&lt;-"  Grid.Row="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PointerPressed="CraneLeftPressed" PointerReleased="CraneReleased"/>
+        <Button Content="\/" Grid.Column="1" Grid.Row="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PointerPressed="SpreaderDownPressed" PointerReleased="SpreaderReleased"/>
+        <Button Content="/\" Grid.Column="1" Grid.Row="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PointerPressed="SpreaderUpPressed" PointerReleased="SpreaderReleased"/>
+        <Button Content="-&gt;" Grid.Column="2" Grid.Row="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PointerPressed="CrabRightPressed" PointerReleased="CrabReleased"/>
+        <Button Content="&lt;-" Grid.Row="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PointerPressed="CrabLeftPressed" PointerReleased="CrabReleased"/>
+        <TextBox x:Name="urlBox" Grid.ColumnSpan="3" TextWrapping="NoWrap" TextChanged="UrlChanged"  Margin="10"/>
+        <TextBox Text="{Binding controller.State}"  Grid.Column="2" Grid.Row="2" TextChanged="UrlChanged" Margin="10" IsReadOnly="True" TextWrapping="WrapWholeWords"/>
     </Grid>
 </Page>

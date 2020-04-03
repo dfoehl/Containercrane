@@ -1,4 +1,5 @@
 ﻿
+using CraneAPI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,42 +29,59 @@ namespace CraneControl
         public MainPage()
         {
             this.InitializeComponent();
-
+            controller = new CraneController();
+            DataContext = this;
         }
 
-        private void UrlChanged(object sender, TextChangedEventArgs e)
+        private async void UrlChanged(object sender, TextChangedEventArgs e)
         {
-
+            controller.BaseAdress = new Uri(urlBox.Text);
+            await controller.Initialize();
         }
 
-        private void CrabLeftClicked(object sender, RoutedEventArgs e)
+        private async void CraneRightPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            await controller.StartMoveAsync(EScope.Crane, EDirection.Right);
         }
 
-        private void SpreaderUpClicked(object sender, RoutedEventArgs e)
+        private async void CraneLeftPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            await controller.StartMoveAsync(EScope.Crane, EDirection.Left);
         }
 
-        private void CrabRightClicked(object sender, RoutedEventArgs e)
+        private async void CraneReleased(object sender, PointerRoutedEventArgs e)
         {
-
+            await controller.StopMoveAsync(EScope.Crane);
         }
 
-        private void SpreaderDownClicked(object sender, RoutedEventArgs e)
+        private async void CrabRightPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            await controller.StartMoveAsync(EScope.Crab, EDirection.Right);
         }
 
-        private void CraneRightClicked(object sender, RoutedEventArgs e)
+        private async void CrabLeftPressed(object sender, PointerRoutedEventArgs e)
         {
-
+            await controller.StartMoveAsync(EScope.Crab, EDirection.Left);
         }
 
-        private void CraneLeftClicked(object sender, RoutedEventArgs e)
+        private async void CrabReleased(object sender, PointerRoutedEventArgs e)
         {
+            await controller.StopMoveAsync(EScope.Crab);
+        }
 
+        private async void SpreaderUpPressed(object sender, PointerRoutedEventArgs e)
+        {
+            await controller.StartMoveAsync(EScope.Spreader, EDirection.Up);
+        }
+
+        private async void SpreaderDownPressed(object sender, PointerRoutedEventArgs e)
+        {
+            await controller.StartMoveAsync(EScope.Spreader, EDirection.Down);
+        }
+
+        private async void SpreaderReleased(object sender, PointerRoutedEventArgs e)
+        {
+            await controller.StopMoveAsync(EScope.Spreader);
         }
     }
 }

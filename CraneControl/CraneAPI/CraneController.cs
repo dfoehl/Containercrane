@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace CraneAPI
@@ -10,6 +11,7 @@ namespace CraneAPI
     {
         private HttpClient mainClient, secondaryClient;
         private Dictionary<EScope, bool> runningMotors;
+        private EState state;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,7 +28,18 @@ namespace CraneAPI
         }
 
         public bool Initialized { get { return State == EState.Initialized; } }
-        public EState State { get; private set; }
+        public EState State
+        {
+            get { return state; }
+            private set
+            {
+                if (value != state)
+                {
+                    state = value;
+                    FirePropertyChanged();
+                }
+            }
+        }
 
         public CraneController()
         {
@@ -150,6 +163,11 @@ namespace CraneAPI
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void FirePropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

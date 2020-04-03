@@ -154,6 +154,12 @@
       <Version>6.2.9</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CraneAPI\CraneAPI.csproj">
+      <Project>{259417a5-649d-453c-91ba-1e843323cfb6}</Project>
+      <Name>CraneAPI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
